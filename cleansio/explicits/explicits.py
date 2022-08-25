@@ -27,7 +27,7 @@ class Explicits():
         with open(self.__get_explicits_path(), 'rb') as file:
             decrypted_content = self.__get_decrypted_content(file)
 
-        yaml_content = yaml.load(decrypted_content)
+        yaml_content = yaml.full_load(decrypted_content)
         return set(yaml_content['explicits'])
 
     @classmethod
