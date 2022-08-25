@@ -75,3 +75,7 @@ docs/_static/packages.png
 
 # Ignore VSCode settings
 /.vscode/settings.json
+
+# Ignore Python's virtualenv
+/venv
+/py3.9
