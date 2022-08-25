@@ -2,7 +2,7 @@
 
 from itertools import repeat
 from multiprocessing.dummy import Pool as ThreadPool
-from google.cloud.speech import enums, SpeechClient, types
+from google.cloud import speech
 from utils import append_before_ext
 
 class Transcribe():
@@ -24,19 +24,19 @@ class Transcribe():
         with open(accuracy_chunk_path, 'rb') as audio_content:
             content = audio_content.read()
         config = self.__get_config(encoding, frame_rate)
-        audio = types.RecognitionAudio(content=content)
-        return SpeechClient().recognize(config, audio)
+        audio = speech.RecognitionAudio(content=content)
+        return speech.SpeechClient().recognize(config = config, audio = audio)
 
     @classmethod
     def __get_config(cls, frame_rate, encoding):
         params = {
-            'encoding': enums.RecognitionConfig.AudioEncoding[encoding],
+            'encoding': speech.RecognitionConfig.AudioEncoding[encoding],
             'sample_rate_hertz': frame_rate,
             'language_code': 'en-US',
             'enable_word_time_offsets': True,
             'profanity_filter': False
         }
-        return types.RecognitionConfig(**params)
+        return speech.RecognitionConfig(**params)
 
     @classmethod
     def __combine_transcripts(cls, transcripts):
