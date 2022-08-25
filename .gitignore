@@ -69,3 +69,6 @@ docs/_static/packages.png
 
 # Test audio file
 !tests/data/testing.wav
+
+# Ignore Google Cloud Credentials
+/GoogleCloudCredentials.json
