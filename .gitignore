@@ -72,3 +72,6 @@ docs/_static/packages.png
 
 # Ignore Google Cloud Credentials
 /GoogleCloudCredentials.json
+
+# Ignore VSCode settings
+/.vscode/settings.json
