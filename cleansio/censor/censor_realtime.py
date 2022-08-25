@@ -3,7 +3,7 @@
 import platform
 from colorama import Fore
 from utils import create_env_var
-from .censor_realtime_mac import CensorRealtimeMac
+# from .censor_realtime_mac import CensorRealtimeMac
 
 class CensorRealtime():
     """ Filters audio stream in real-time """
@@ -16,7 +16,7 @@ class CensorRealtime():
     def censor(self):
         """ Censors audio in real-time. Implementation dependent on OS """
         system = platform.system()
-        if system == 'Darwin':
-            CensorRealtimeMac(self.args, self.explicits).censor()
-        else:
-            print(Fore.RED + 'Real-time does not support your OS' + Fore.RESET)
+        # if system == 'Darwin':
+        #     CensorRealtimeMac(self.args, self.explicits).censor()
+        # else:
+        print(Fore.RED + 'Real-time does not support your OS' + Fore.RESET)
