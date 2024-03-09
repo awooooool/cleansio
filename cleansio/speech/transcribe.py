@@ -3,6 +3,8 @@
 from itertools import repeat
 from multiprocessing.dummy import Pool as ThreadPool
 from google.cloud import speech
+from google.cloud.speech import enums
+from google.cloud.speech import types
 from utils import append_before_ext
 
 class Transcribe():
@@ -24,19 +26,32 @@ class Transcribe():
         with open(accuracy_chunk_path, 'rb') as audio_content:
             content = audio_content.read()
         config = self.__get_config(encoding, frame_rate)
-        audio = speech.RecognitionAudio(content=content)
+        audio = types.RecognitionAudio(content=content)
         return speech.SpeechClient().recognize(config = config, audio = audio)
 
     @classmethod
     def __get_config(cls, frame_rate, encoding):
-        params = {
-            'encoding': speech.RecognitionConfig.AudioEncoding[encoding],
-            'sample_rate_hertz': frame_rate,
-            'language_code': 'en-US',
-            'enable_word_time_offsets': True,
-            'profanity_filter': False
-        }
-        return speech.RecognitionConfig(**params)
+        # params = {
+        #     'encoding': enums.RecognitionConfig.AudioEncoding[encoding],
+        #     'sample_rate_hertz': frame_rate,
+        #     'language_code': 'en-US',
+        #     'enable_word_time_offsets': True,
+        #     'profanity_filter': False
+        # }
+
+        config = types.RecognitionConfig(
+            encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
+            # sample_rate_hertz=frame_rate,
+            language_code="en-US",
+            enable_word_time_offsets=True,
+            profanity_filter=False,
+            max_alternatives=1,
+        )
+        # streaming_config = types.RecognitionConfig(
+        #     config=config, interim_results=True
+        # )
+
+        return config
 
     @classmethod
     def __combine_transcripts(cls, transcripts):
