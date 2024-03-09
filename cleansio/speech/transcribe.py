@@ -34,7 +34,7 @@ class Transcribe():
         config = types.RecognitionConfig(
             encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
             # sample_rate_hertz=frame_rate,
-            language_code="en-US",
+            language_code="id-ID",
             enable_word_time_offsets=True,
             profanity_filter=False,
             max_alternatives=1,

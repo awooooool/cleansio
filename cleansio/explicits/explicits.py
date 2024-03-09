@@ -26,9 +26,8 @@ class Explicits():
 
     def __internal_set(self):
         with open(self.__get_explicits_path(), 'rb') as file:
-            decrypted_content = self.__get_decrypted_content(file)
+            yaml_content = yaml.full_load(file)
 
-        yaml_content = yaml.full_load(decrypted_content)
         return set(yaml_content['explicits'])
 
     @classmethod
@@ -38,17 +37,7 @@ class Explicits():
     @classmethod
     def __get_explicits_path(cls):
         """ Return path of encrypted explicits file """
-        path_to_enc_file = relative_path('../data/explicits-list')
+        # path_to_enc_file = relative_path('../data/explicits-list')
+        path_to_enc_file = relative_path('../data/explicits-list.txt')
         return path_to_enc_file
 
-    @classmethod
-    def __get_decrypted_content(cls, encrypted_file):
-        """ Decrypt the encrypted file and return content as string """
-        decryptor = AES.new(bytes('cleansio_sym_key', 'utf-8'), AES.MODE_CBC, bytes('cleansioCensorIV', 'utf-8'))
-        content = ''
-        while True:
-            block = encrypted_file.read(16)
-            if not block:
-                break
-            content += decryptor.decrypt(block).decode('utf-8')
-        return content
