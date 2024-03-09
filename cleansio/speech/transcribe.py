@@ -31,14 +31,6 @@ class Transcribe():
 
     @classmethod
     def __get_config(cls, frame_rate, encoding):
-        # params = {
-        #     'encoding': enums.RecognitionConfig.AudioEncoding[encoding],
-        #     'sample_rate_hertz': frame_rate,
-        #     'language_code': 'en-US',
-        #     'enable_word_time_offsets': True,
-        #     'profanity_filter': False
-        # }
-
         config = types.RecognitionConfig(
             encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
             # sample_rate_hertz=frame_rate,
@@ -47,9 +39,6 @@ class Transcribe():
             profanity_filter=False,
             max_alternatives=1,
         )
-        # streaming_config = types.RecognitionConfig(
-        #     config=config, interim_results=True
-        # )
 
         return config
 

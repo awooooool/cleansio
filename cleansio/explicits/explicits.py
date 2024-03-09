@@ -44,7 +44,6 @@ class Explicits():
     @classmethod
     def __get_decrypted_content(cls, encrypted_file):
         """ Decrypt the encrypted file and return content as string """
-        # decryptor = AES.new(bytes('cleansio_sym_key', 'utf-8'), AES.MODE_CBC, 'cleansioCensorIV')
         decryptor = AES.new(bytes('cleansio_sym_key', 'utf-8'), AES.MODE_CBC, bytes('cleansioCensorIV', 'utf-8'))
         content = ''
         while True:
